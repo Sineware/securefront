@@ -1,10 +1,10 @@
 services:
   sf-server:
-    build: .
-    #image: sineware/securefront:latest
+    #build: .
+    image: sineware/securefront:latest
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ${PWD}/tls:/root/.acme.sh
-      - ${PWD}/securefront.config.toml:/app/securefront.config.toml
+      - ./tls:/root/.acme.sh
+      - ./securefront.config.toml:/app/securefront.config.toml

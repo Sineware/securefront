@@ -11,5 +11,6 @@ ADD . /app
 RUN deno install --entrypoint src/main.ts
 RUN deno check src/main.ts
 RUN deno cache src/main.ts
+RUN touch securefront.config.toml
 
 CMD ["run", "--allow-net", "--allow-read", "--allow-run", "src/main.ts"]

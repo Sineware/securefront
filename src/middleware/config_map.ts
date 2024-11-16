@@ -3,7 +3,10 @@ import { config } from "../config.ts";
 
 export async function configMap(ctx: Context, next: () => Promise<unknown>) {
     const host = ctx.request.url.host;
-    const proxy = config.proxy.find(p => p.host === host);
+    const path = ctx.request.url.pathname;
+
+    const proxy = config.proxy.find(p => p.host === host && (p.path ? path.startsWith(p.path) : true));
+
     if (!proxy) {
         const wildcardProxy = config.proxy.find(p => p.host === "*");
         if (wildcardProxy) {
@@ -16,7 +19,7 @@ export async function configMap(ctx: Context, next: () => Promise<unknown>) {
             ctx.response.body = "Not found";
             return;
         }
-    }
+    } 
     ctx.state.proxy = proxy;
     await next();
 }

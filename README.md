@@ -27,7 +27,7 @@ docker compose up
 - Options under `[tls]` are for the automatic TLS cert generation feature. If disable, Securefront will listen on http only.
 - Likewise `[tls_manual]` is to bring your own cert. Only tls or tls_manual should be enabled, not both.
 - Each `[[proxy]]` entry defines a reverse proxy configuration.
-    - `host` and `url` define the incoming request path to match (ex. if `host=sineware.ca`, then all requests to sineware.ca/* will match, if you addtionally specify `url=/api`, then only requests to sineware.ca/api/* will match). 
+    - `host` and `path` define the incoming request path to match (ex. if `host=sineware.ca`, then all requests to sineware.ca/* will match, if you addtionally specify `path=/api`, then only requests to sineware.ca/api/* will match). 
     - `proxy_url` is the backend URL to proxy to. Requests will have the Host header match the incoming request (aka. `host=`). Howevever, responses are not rewritten.
     - `websocket` is a bool which enables websocket support for this route.
     - `captcha` is a bool which enables the captcha guard page for this route.

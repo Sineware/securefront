@@ -24,8 +24,8 @@ email = "admin@sineware.ca"
 
 # Each [[proxy]] block is a reverse proxy configuration
 [[proxy]]
-host = "localhost"                  # Hostname of the incoming request (your domain)
-url = "/api"                        # URL path to match (optional, if not provided, it will match all paths)
+host = "id.sineware.ca"             # Hostname of the incoming request (your domain)
+path = "/api"                       # URL path to match (optional, if not provided, it will match all paths)
 proxy_url = "https://sineware.ca"   # Backend URL to proxy to
 websocket = true                    # Enable websocket proxy support
 captcha = true                      # Enable captcha protection
