@@ -1,0 +1,40 @@
+# Don't change these, use docker compose to port map
+port = 80
+tls_port = 443
+hostname = "0.0.0.0"
+
+# Set this to a long, random string
+captcha_jwt_secret = "abcdefghijklmnopqrstuvwxyz123567890"
+# Set this to your CF Turnstile sitekey and secretkey
+hcaptcha_sitekey = ""
+hcaptcha_secret = ""
+
+# If you want to enable automatic tls/ssl, you can use the following configuration
+[tls]
+enabled = true
+domains = "sftest.sineware.ca" # Comma separated list of domains/subdomains, the first domain will be the name of the cert
+email = "admin@sineware.ca"
+
+# If you already have a tls certificate, you can use the following configuration instead
+# make sure to mount them as a docker volume
+# [tls_manual]
+# enabled = false
+# cert = "/opt/cert.pem"
+# key = "/opt/key.pem"
+
+# Each [[proxy]] block is a reverse proxy configuration
+[[proxy]]
+host = "localhost"                  # Hostname of the incoming request (your domain)
+url = "/api"                        # URL path to match (optional, if not provided, it will match all paths)
+proxy_url = "https://sineware.ca"   # Backend URL to proxy to
+websocket = true                    # Enable websocket proxy support
+captcha = true                      # Enable captcha protection
+captcha_expire = 60                 # Captcha expiration time in minutes
+
+# Default proxy
+[[proxy]]
+host = "*"
+proxy_url = "https://sineware.ca"
+websocket = true
+captcha = true
+captcha_expire = 1
